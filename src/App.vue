@@ -1,6 +1,6 @@
 <template>
   <v-app id="inspire">
-    <v-navigation-drawer v-model="drawerRight" app clipped right>
+    <!-- <v-navigation-drawer v-model="drawerRight" app clipped right>
       <v-list dense>
         <v-list-item @click.stop="right = !right">
           <v-list-item-action>
@@ -11,9 +11,10 @@
           </v-list-item-content>
         </v-list-item>
       </v-list>
-    </v-navigation-drawer>
+    </v-navigation-drawer> -->
+    <LeftSideBar />
 
-    <v-app-bar app clipped-right color="blue-grey" dark>
+    <v-app-bar app clipped-right color="primary" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Toolbar</v-toolbar-title>
       <v-spacer />
@@ -68,7 +69,7 @@
 
     <v-navigation-drawer v-model="right" fixed right temporary />
 
-    <v-footer app color="blue-grey" class="white--text">
+    <v-footer app color="secondary" class="white--text">
       <span>Vuetify</span>
       <v-spacer />
       <span>&copy; 2019</span>
@@ -77,15 +78,27 @@
 </template>
 
 <script>
+  import { mapGetters } from "vuex";
+  import LeftSideBar from './components/layouts/LeftSideBar'
+
 export default {
   props: {
     source: String
   },
+  components: {
+    LeftSideBar
+  },
   data: () => ({
     drawer: null,
-    drawerRight: null,
-    right: false,
+    // drawerRight: null,
+    // right: false,
     left: false
-  })
+  }),
+  computed: {
+    ...mapGetters({
+      right: "right",
+      drawerRight: "drawerRight"
+    })
+  }
 };
 </script>

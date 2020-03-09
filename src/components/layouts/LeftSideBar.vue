@@ -1,64 +1,49 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawerRight" app clipped right>
+    <v-navigation-drawer v-model="drawer" @input="DrawerLeft" app>
       <v-list dense>
-        <v-list-item @click.stop="right = !right">
+        <v-list-item @click.stop="left = !left">
           <v-list-item-action>
             <v-icon>mdi-exit-to-app</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Open Temporary Drawer Right</v-list-item-title>
+            <v-list-item-title>Open Temporary Drawer</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
+    <v-navigation-drawer v-model="left" fixed temporary />
   </div>
 </template>
 
 <script>
-// import { mapGetters } from "vuex";
-
+    import { mapActions } from "vuex";
 export default {
   name: "LeftSideBar",
-
-  //   props: {
-  //     right: Boolean,
-  //     drawerRight: Boolean
-  //   },
-  mounted() {
-            this.$store.commit("setRight", false);
-        },
-
   computed: {
-    // ...mapGetters({
-    //   right: "right",
-    //   drawerRight: "drawerRight"
-    // }),
-    right: {
+    drawer: {
       get() {
-        return this.$store.getters.right;
+        return this.$store.getters.drawer;
       },
       set(value) {
-          value = ! value;
-        this.$store.commit("setRight", value);
+        this.$store.commit("setDrawer", value);
       }
     },
-    drawerRight: {
+    left: {
       get() {
-          console.log('xxxx');
-        return this.$store.getters.drawerRight;
+        return this.$store.getters.left;
       },
       set(value) {
-          value = ! value;
-        this.$store.commit("setDrawerRight", value);
+        this.$store.commit("setLeft", value);
       }
     },
   },
-
-    // data: () => ({
-    //   right: false,
-    //   drawerRight: false,
-    // })
+  methods:{
+    ...mapActions({
+      DrawerLeft: "TOGGLE_NAVIGATION_DRAWER_LEFT"
+    }),
+  }
 };
 </script>
 

@@ -21,7 +21,13 @@ const getters = {
 };
 
 const actions = {
+    TOGGLE_NAVIGATION_DRAWER_RIGHT(context, open) {
+        context.commit('setDrawerRight', open)
+    },
 
+    TOGGLE_NAVIGATION_DRAWER_LEFT(context, open) {
+        context.commit('setDrawer', open)
+    },
 };
 
 const mutations = {

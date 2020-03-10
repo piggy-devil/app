@@ -1,15 +1,24 @@
 <template>
-    <v-app-bar app clipped-right color="primary" dark>
+  <div>
+    <v-app-bar app clipped-right color="primary" dark flat>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>Toolbar</v-toolbar-title>
       <v-spacer />
+
+      <Menu />
+
       <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight" />
     </v-app-bar>
+  </div>
 </template>
 
 <script>
+import Menu from "../menus/Menu";
 export default {
   name: "Toolbar",
+  components: {
+    Menu
+  },
 
   computed: {
     drawerRight: {

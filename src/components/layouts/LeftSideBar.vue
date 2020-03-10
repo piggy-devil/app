@@ -1,16 +1,9 @@
 <template>
   <div>
     <v-navigation-drawer v-model="drawer" @input="DrawerLeft" app>
-      <v-list dense>
-        <v-list-item @click.stop="left = !left">
-          <v-list-item-action>
-            <v-icon>mdi-exit-to-app</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Open Temporary Drawer</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
+
+      <LeftMenu />
+
     </v-navigation-drawer>
 
     <v-navigation-drawer v-model="left" fixed temporary />
@@ -18,9 +11,19 @@
 </template>
 
 <script>
-    import { mapActions } from "vuex";
+import { mapActions } from "vuex";
+import LeftMenu from "../menus/LeftMenu";
 export default {
   name: "LeftSideBar",
+  data() {
+    return {
+      dense: true,
+      avatar: true
+    };
+  },
+  components: {
+    LeftMenu
+  },
   computed: {
     drawer: {
       get() {
@@ -37,12 +40,12 @@ export default {
       set(value) {
         this.$store.commit("setLeft", value);
       }
-    },
+    }
   },
-  methods:{
+  methods: {
     ...mapActions({
       DrawerLeft: "TOGGLE_NAVIGATION_DRAWER_LEFT"
-    }),
+    })
   }
 };
 </script>
